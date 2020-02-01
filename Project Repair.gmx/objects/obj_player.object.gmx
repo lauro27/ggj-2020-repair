@@ -31,7 +31,7 @@ hsp = 5
 vsp = 0
 grav = 0.5
 energy = 100
-jumpspeed = 3
+jumpspeed = 5
 </string>
           </argument>
         </arguments>
@@ -73,10 +73,11 @@ else if(!place_meeting(x+xcol, y, obj_solid))
 
 if(!place_meeting(x,y+1,obj_solid)) 
 {
-    if(place_meeting(x,y+vsp,obj_solid)and vsp &gt;=0)
+    floor_id = instance_position(x,y+vsp,obj_solid)
+    
+    if(floor_id != noone)
     {
-        floor_id = instance_position(x,y+vsp,obj_solid)
-        y= other.y-1
+        y= floor_id.y-32
         vsp = 0
     }
     else{vsp += grav}
