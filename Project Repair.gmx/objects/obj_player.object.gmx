@@ -32,6 +32,12 @@ vsp = 0
 grav = 0.7
 energy = 100
 jumpspeed = 8
+inventory1 = M_NONE
+inventory2 = M_NONE
+
+timer = 10800
+
+allslots = ds_list_create()
 </string>
           </argument>
         </arguments>
@@ -54,12 +60,22 @@ jumpspeed = 8
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>///move player
+            <string>///move player and interact
 
 scr_detect_input()
 
 nextx = (right_key - left_key) * hsp 
 xcol = (right_key - left_key)
+if(place_meeting(x,y+1,obj_rthread)) 
+{
+    nextx = hsp*3  
+    xcol = 1 
+}
+if(place_meeting(x,y+1,obj_lthread)) 
+{
+    nextx = -hsp*3  
+    xcol = -1
+}
 if(!place_meeting(x+nextx, y, obj_solid))
 {
     x += nextx
@@ -93,7 +109,46 @@ else if (vsp&lt;16){vsp += grav}
 
 y += vsp
 
-//ver_view = (up_key + down_key)
+//PLACE THING
+
+
+for(i=0;i&lt; ds_list_size(allslots);i++)
+{
+    slot_id = instance_find(obj_slot,i)
+    if (slot_id != noone)
+    {
+        if (distance_to_point(slot_id.x,slot_id.y)&lt;128 and place_key)
+        {
+            if (inventory1 == M_NONE and !(slot_id.module == M_NONE))
+            {
+                inventory1 = slot_id.module
+                slot_id.module = M_NONE
+                scr_check_every_slot()
+            }
+            else if(inventory1 != M_NONE and slot_id.module == M_NONE and !place_meeting(x,y,slot_id))
+            {
+                slot_id.module = inventory1
+                inventory1 = M_NONE
+                scr_check_every_slot()
+            }
+        }
+        if (distance_to_point(slot_id.x,slot_id.y)&lt;128 and place2_key)
+        {
+            if (inventory2 == M_NONE and !(slot_id.module == M_NONE))
+            {
+                inventory2 = slot_id.module
+                slot_id.module = M_NONE
+                scr_check_every_slot()
+            }
+            else if(inventory2 != M_NONE and slot_id.module == M_NONE and !place_meeting(x,y,slot_id))
+            {
+                slot_id.module = inventory2
+                inventory2 = M_NONE
+                scr_check_every_slot()
+            }
+        }
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -113,6 +168,116 @@ y += vsp
         <whoName>self</whoName>
         <relative>0</relative>
         <isnot>0</isnot>
+      </action>
+    </event>
+    <event eventtype="7" enumb="5">
+      <action>
+        <libid>1</libid>
+        <id>601</id>
+        <kind>0</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>1</exetype>
+        <functionname>action_execute_script</functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>9</kind>
+            <script>scr_search_slots</script>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+          <argument>
+            <kind>0</kind>
+            <string></string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="64">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_sprite(spr_battery,0,10,10)
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self()
+
+for(i=0;i&lt; ds_list_size(allslots);i++)
+{
+    slot_id = instance_find(obj_slot,i)
+    if (slot_id != noone)
+    {
+        if (distance_to_point(slot_id.x,slot_id.y)&lt;128)
+        {
+            if(!place_meeting(x,y,obj_slot) or inventory1 == M_NONE)
+            {
+                draw_set_colour(c_orange)
+                draw_line_width(x+16,y+16,slot_id.x,slot_id.y,3)
+            }
+            else
+            {
+                draw_set_colour(c_red)
+                draw_line_width(x+16,y+16,slot_id.x,slot_id.y,3)
+    
+            }
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
       </action>
     </event>
   </events>
