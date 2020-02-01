@@ -27,11 +27,11 @@
             <kind>1</kind>
             <string>///Create variables
 
-hsp = 3
+hsp = 4
 vsp = 0
 grav = 0.7
 energy = 100
-jumpspeed = 7
+jumpspeed = 8
 </string>
           </argument>
         </arguments>
@@ -82,12 +82,12 @@ if(floor_id != noone)
     if (vsp&gt;=0)
     {
         y= floor_id.y-floor_id.sprite_height
-        vsp = 0
     }
     else
     {
-        vsp=0
+        y= floor_id.y+floor_id.sprite_height
     }
+    vsp = 0
 }
 else if (vsp&lt;16){vsp += grav}
 

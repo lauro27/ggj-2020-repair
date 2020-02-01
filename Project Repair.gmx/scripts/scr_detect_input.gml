@@ -1,10 +1,10 @@
 ///scr_detect_input()
 
 //define movement
-right_key = keyboard_check(vk_right)
-left_key = keyboard_check(vk_left)
-up_key = keyboard_check(vk_up)
-down_key = keyboard_check(vk_down)
+right_key = keyboard_check(ord('D'))
+left_key = keyboard_check(ord('A'))
+up_key = keyboard_check(ord('W'))
+down_key = keyboard_check(ord('S'))
 
-jump_key = keyboard_check_pressed(ord('Z'))
-place_key =keyboard_check_pressed(ord('X'))
+jump_key = keyboard_check_pressed(vk_space)
+place_key =mouse_check_button_pressed(mb_left)
