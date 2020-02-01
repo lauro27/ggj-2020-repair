@@ -52,7 +52,8 @@
             <kind>1</kind>
             <string>if (open and place_meeting(x,y,obj_player))
 {
-    //insert level complete   
+    
+    room_goto_next() 
 }
 
 </string>

@@ -3,7 +3,7 @@
   <spriteName>spr_slot</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>10</depth>
+  <depth>10000</depth>
   <persistent>0</persistent>
   <parentName>&lt;undefined&gt;</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -67,7 +67,7 @@ target = M_NONE
     case M_MOVE:
         if (!instance_place(x,y,obj_move))
         {
-            instance_create(x-32,y+32,obj_move)
+            instance_create(x,y+32,obj_move)
         }
         break
     case M_PLATFORM:
@@ -91,6 +91,41 @@ target = M_NONE
     case M_NONE:
         scr_search_destroy()
         break
+}
+
+
+player = instance_nearest(x,y,obj_player);
+
+if (distance_to_object(player)&lt;128 and !place_meeting(x,y,player) and player.place_key and position_meeting(mouse_x,mouse_y,self))
+{
+    if(player.inventory1 != M_NONE and module ==M_NONE)
+    {
+        module = player.inventory1
+        player.inventory1 = M_NONE
+        scr_check_every_slot()
+    }
+    else if(player.inventory1 == M_NONE and module != M_NONE)
+    {
+        player.inventory1 = module
+        module = M_NONE
+        scr_check_every_slot()
+    }
+}
+
+if (distance_to_object(player)&lt;128 and !place_meeting(x,y,player) and player.place2_key and position_meeting(mouse_x,mouse_y,self))
+{
+    if(player.inventory2 != M_NONE and module ==M_NONE)
+    {
+        module = player.inventory2
+        player.inventory2 = M_NONE
+        scr_check_every_slot()
+    }
+    else if(player.inventory2 == M_NONE and module != M_NONE)
+    {
+        player.inventory2 = module
+        module = M_NONE
+        scr_check_every_slot()
+    }
 }
 </string>
           </argument>
@@ -117,6 +152,15 @@ target = M_NONE
             <string>image_index = target
 
 draw_self()
+
+
+if (distance_to_object(player)&lt;128)
+{
+   if(!place_meeting(x,y,player))
+   {draw_line_width_colour(x,y,player.x+16,player.y+16,3,c_orange,c_orange)}
+   else
+   {draw_line_width_colour(x,y,player.x+16,player.y+16,3,c_red,c_red)}
+}
 </string>
           </argument>
         </arguments>

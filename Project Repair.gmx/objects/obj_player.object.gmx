@@ -76,6 +76,17 @@ if(place_meeting(x,y+1,obj_lthread))
     nextx = -hsp*3  
     xcol = -1
 }
+if(place_meeting(x,y+1,obj_move))
+{
+    var this_one = instance_place(x,y+1,obj_move);
+    nextx += -this_one.left * this_one.spd
+    xcol += -this_one.left
+}
+if(place_meeting(x,y+1,obj_elevator))
+{
+    var that_one = instance_place(x,y+1,obj_elevator);
+    y = that_one.y-1
+}
 if(!place_meeting(x+nextx, y, obj_solid))
 {
     x += nextx
@@ -109,46 +120,7 @@ else if (vsp&lt;16){vsp += grav}
 
 y += vsp
 
-//PLACE THING
 
-
-for(i=0;i&lt; ds_list_size(allslots);i++)
-{
-    slot_id = instance_find(obj_slot,i)
-    if (slot_id != noone)
-    {
-        if (distance_to_point(slot_id.x,slot_id.y)&lt;128 and place_key)
-        {
-            if (inventory1 == M_NONE and !(slot_id.module == M_NONE))
-            {
-                inventory1 = slot_id.module
-                slot_id.module = M_NONE
-                scr_check_every_slot()
-            }
-            else if(inventory1 != M_NONE and slot_id.module == M_NONE and !place_meeting(x,y,slot_id))
-            {
-                slot_id.module = inventory1
-                inventory1 = M_NONE
-                scr_check_every_slot()
-            }
-        }
-        if (distance_to_point(slot_id.x,slot_id.y)&lt;128 and place2_key)
-        {
-            if (inventory2 == M_NONE and !(slot_id.module == M_NONE))
-            {
-                inventory2 = slot_id.module
-                slot_id.module = M_NONE
-                scr_check_every_slot()
-            }
-            else if(inventory2 != M_NONE and slot_id.module == M_NONE and !place_meeting(x,y,slot_id))
-            {
-                slot_id.module = inventory2
-                inventory2 = M_NONE
-                scr_check_every_slot()
-            }
-        }
-    }
-}
 </string>
           </argument>
         </arguments>
@@ -230,6 +202,8 @@ for(i=0;i&lt; ds_list_size(allslots);i++)
           <argument>
             <kind>1</kind>
             <string>draw_sprite(spr_battery,0,10,10)
+
+
 </string>
           </argument>
         </arguments>

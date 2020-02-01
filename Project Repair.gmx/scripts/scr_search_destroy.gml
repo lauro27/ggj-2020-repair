@@ -5,5 +5,9 @@ if !(id_m == noone)
     instance_destroy(id_m)
 }else
 {
-   
+    id_m = instance_place(x,y,obj_ladder)
+    if !(id_m == noone)
+    {
+        instance_destroy(id_m)
+    }
 }
