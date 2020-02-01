@@ -27,11 +27,11 @@
             <kind>1</kind>
             <string>///Create variables
 
-hsp = 5
+hsp = 3
 vsp = 0
-grav = 0.5
+grav = 0.7
 energy = 100
-jumpspeed = 5
+jumpspeed = 7
 </string>
           </argument>
         </arguments>
@@ -71,22 +71,25 @@ else if(!place_meeting(x+xcol, y, obj_solid))
 
 //gravity (and then implement jump)
 
-if(!place_meeting(x,y+1,obj_solid)) 
+if(place_meeting(x,y+1,obj_solid)) 
 {
-    floor_id = instance_position(x,y+vsp,obj_solid)
-    
-    if(floor_id != noone)
-    {
-        y= floor_id.y-32
-        vsp = 0
-    }
-    else{vsp += grav}
-}
-else 
-{
-    vsp = 0
     if (jump_key){vsp = -jumpspeed}
 }
+floor_id = instance_place(x,y+vsp+1,obj_solid)
+    
+if(floor_id != noone)
+{
+    if (vsp&gt;=0)
+    {
+        y= floor_id.y-floor_id.sprite_height
+        vsp = 0
+    }
+    else
+    {
+        vsp=0
+    }
+}
+else if (vsp&lt;16){vsp += grav}
 
 y += vsp
 
