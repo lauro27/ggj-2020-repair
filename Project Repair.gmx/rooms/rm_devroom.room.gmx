@@ -94,8 +94,8 @@
     <instance objName="obj_solid" x="672" y="256" name="inst_F78393A1" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_solid" x="704" y="256" name="inst_913C899A" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_slot" x="288" y="352" name="inst_1EE79885" locked="0" code="self.module = M_LADDER&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="obj_slot" x="672" y="352" name="inst_A5929467" locked="0" code="self.module = M_RTHREAD&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_slot" x="544" y="352" name="inst_11F15797" locked="0" code="self.module = M_LTHREAD&#xA;self.target = M_LADDER&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="obj_slot" x="672" y="352" name="inst_A5929467" locked="0" code="self.module = M_RTHREAD&#xA;" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="obj_door" x="640" y="160" name="inst_733F55DA" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>

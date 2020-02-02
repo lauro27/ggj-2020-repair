@@ -1,0 +1,57 @@
+// 2020-01-31 20:55:04
+#event create|Create variables
+
+hsp = 5
+vsp = 0
+grav = 4
+energy = 100
+jumptimermax = 3
+jumptimer = jumptimermax
+
+#event step|move player
+
+scr_detect_input()
+
+nextx = (right_key - left_key) *32
+if(!position_meeting(x+nextx, y, obj_solid))
+{
+    x += nextx
+}
+
+//gravity (and then implement jump)
+
+if(!position_meeting(x,y+32,obj_solid)) 
+{
+    //not jumping and falling 
+    
+    if (jump_key == false)
+    {
+        jumptimer = 0
+    }
+    if (jumptimer <=0 or jump_key == false)
+    {
+        if (vsp < 7) {vsp += 0.75}
+    }
+    else if (jump_key == true and jumptimer>0)
+    {
+        vsp = -jumpspeed
+        jumptimer -= 0.1
+    }
+}
+else 
+{
+    if (jump_key == true)
+    {
+        vsp += jumpspeed
+        jumptimer -= 0.1
+    }
+    else
+    {
+        vsp = 0
+        jumptimer = jumptimermax
+    }
+}
+
+y += vsp
+
+ver_view = (up_key + down_key)
