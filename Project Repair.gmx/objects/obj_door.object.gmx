@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>open = false
-
+done = 0
 
 </string>
           </argument>
@@ -53,8 +53,15 @@
             <string>if (open and place_meeting(x,y,obj_player))
 {
     
-    room_goto_next() 
-}
+    p= instance_find(obj_player,0);
+    p.can_move = false;
+    if (done &gt;= 150)
+    {
+        room_goto_next();
+    }
+    else{done++}
+} 
+
 
 </string>
           </argument>
@@ -119,7 +126,10 @@ else{image_index = 0}
 
 if (open and place_meeting(x,y,obj_player))
 {
+    draw_set_alpha(done/150)
+    draw_rectangle_colour(0,0,room_width,room_height,c_black,c_black,c_black,c_black,false)
     draw_text(x-30,y,"NICE")
+    draw_set_alpha(1)
 }
 
 draw_self()
