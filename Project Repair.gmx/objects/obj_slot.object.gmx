@@ -96,7 +96,7 @@ target = M_NONE
 
 player = instance_nearest(x,y,obj_player);
 
-if (distance_to_object(player)&lt;128 and !place_meeting(x,y,player) and player.place_key and position_meeting(mouse_x,mouse_y,self))
+if (distance_to_object(player)&lt;64 and !place_meeting(x,y,player) and player.place_key and position_meeting(mouse_x,mouse_y,self))
 {
     if(player.inventory1 != M_NONE and module ==M_NONE)
     {
@@ -112,7 +112,7 @@ if (distance_to_object(player)&lt;128 and !place_meeting(x,y,player) and player.
     }
 }
 
-if (distance_to_object(player)&lt;128 and !place_meeting(x,y,player) and player.place2_key and position_meeting(mouse_x,mouse_y,self))
+if (distance_to_object(player)&lt;64 and !place_meeting(x,y,player) and player.place2_key and position_meeting(mouse_x,mouse_y,self))
 {
     if(player.inventory2 != M_NONE and module ==M_NONE)
     {
@@ -154,12 +154,23 @@ if (distance_to_object(player)&lt;128 and !place_meeting(x,y,player) and player.
 draw_self()
 
 
-if (distance_to_object(player)&lt;128)
+if (distance_to_object(player)&lt;64)
 {
-   if(!place_meeting(x,y,player))
-   {draw_line_width_colour(x,y,player.x+16,player.y+16,3,c_orange,c_orange)}
+   if(!place_meeting(x,y,player) or module != M_NONE)
+   {
+   draw_set_colour(c_yellow);
+   draw_rectangle_width(x-64,y-64,x+64,y+64,4)
+   }
    else
-   {draw_line_width_colour(x,y,player.x+16,player.y+16,3,c_red,c_red)}
+   {
+        draw_set_colour(c_red);
+        draw_rectangle_width(x-64,y-64,x+64,y+64,4)
+   }
+}
+if(module == target)
+{
+    draw_set_colour(c_lime);
+    draw_rectangle_width(x-64,y-64,x+64,y+64,4)
 }
 </string>
           </argument>

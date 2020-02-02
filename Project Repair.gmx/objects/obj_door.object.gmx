@@ -50,12 +50,17 @@ done = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (open and place_meeting(x,y,obj_player))
+            <string>victory = noone
+if (done &gt; 0 and !audio_is_playing(snd_victory))
+{   
+    audio_stop_sound(global.bgm)
+    audio_play_sound(snd_victory,1,false)
+}
+if (open and place_meeting(x,y,obj_player))
 {
-    
     p= instance_find(obj_player,0);
     p.can_move = false;
-    if (done &gt;= 150)
+    if (done &gt;= 90)
     {
         room_goto_next();
     }
@@ -126,7 +131,7 @@ else{image_index = 0}
 
 if (open and place_meeting(x,y,obj_player))
 {
-    draw_set_alpha(done/150)
+    draw_set_alpha(done/90)
     draw_rectangle_colour(0,0,room_width,room_height,c_black,c_black,c_black,c_black,false)
     draw_text(x-30,y,"NICE")
     draw_set_alpha(1)

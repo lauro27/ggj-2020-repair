@@ -35,9 +35,11 @@ jumpspeed = 8
 inventory1 = M_NONE
 inventory2 = M_NONE
 
-battery = 10800
+battery = 9000
 can_move = true
 facing_right = true
+
+done = 0
 
 allslots = ds_list_create()
 </string>
@@ -108,6 +110,7 @@ if (can_move){
         {
             vsp = -jumpspeed
             image_index = 0
+            sound_play(snd_jump)
         }
     }
     floor_id = instance_place(x,y+vsp+1,obj_solid)
@@ -117,6 +120,7 @@ if (can_move){
         if (vsp&gt;=0)
         {
             y= floor_id.y-floor_id.sprite_height
+            sound_play(snd_bup)
         }
         else
         {
@@ -130,12 +134,21 @@ if (can_move){
     
 }
 
-battery--;
 
-if (battery &lt;=0 and can_move = true)
+
+if (battery &lt;=0)
 {
     can_move = false
     image_index = 0
+    if (done&gt;= 90)
+    {
+    room_restart()
+    }else{done++}
+    
+}
+else
+{
+    battery--;
 }
 </string>
           </argument>
@@ -200,6 +213,29 @@ if (battery &lt;=0 and can_move = true)
         </arguments>
       </action>
     </event>
+    <event eventtype="7" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>battery = 0
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="8" enumb="64">
       <action>
         <libid>1</libid>
@@ -219,7 +255,7 @@ if (battery &lt;=0 and can_move = true)
             <kind>1</kind>
             <string>//draw_sprite(spr_battery,0,10,10)
 
-
+draw_set_color
 draw_text(20,20,"BATTERY:" + string(floor(battery/30)))
 
 /*if(battery &lt;=3600)
@@ -229,6 +265,20 @@ draw_text(20,20,"BATTERY:" + string(floor(battery/30)))
     draw_text(500,0,percent);
     draw_sprite_general(spr_bar,0,0,0,sprite_get_width(spr_bar),sprite_get_height(spr_bar),x+23,y+13,1,percent,0,0,0,0,0,0)
 }*/
+
+
+draw_sprite(spr_inventory,0,room_width-128,0)
+draw_sprite(spr_inventory,0,room_width-64,0)
+
+draw_sprite_ext(spr_slot,inventory1,room_width-96,32,.5,.5,0,c_white,1)
+draw_sprite_ext(spr_slot,inventory2,room_width-32,32,.5,.5,0,c_white,1)
+
+if (battery &lt;= 0)
+{
+    draw_set_alpha(done/90)
+    draw_rectangle_colour(0,0,room_width,room_height,c_black,c_black,c_black,c_black,false)
+    draw_set_alpha(1)
+}
 </string>
           </argument>
         </arguments>

@@ -5,7 +5,12 @@
     <Config>Configs\Piezas</Config>
   </Configs>
   <NewExtensions/>
-  <sounds name="sound"/>
+  <sounds name="sound">
+    <sound>sound\snd_level1</sound>
+    <sound>sound\snd_victory</sound>
+    <sound>sound\snd_jump</sound>
+    <sound>sound\snd_bup</sound>
+  </sounds>
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\sprite1</sprite>
@@ -30,6 +35,7 @@
     <sprite>sprites\spr_player_die_r</sprite>
     <sprite>sprites\spr_player_die_l</sprite>
     <sprite>sprites\spr_player_create</sprite>
+    <sprite>sprites\spr_inventory</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_main</background>
@@ -40,6 +46,7 @@
     <script>scripts\scr_search_destroy.gml</script>
     <script>scripts\scr_check_every_slot.gml</script>
     <script>scripts\scr_search_slots.gml</script>
+    <script>scripts\draw_rectangle_width.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_power</font>
@@ -59,6 +66,7 @@
       <object>objects\obj_ladder</object>
       <object>objects\obj_move</object>
     </objects>
+    <object>objects\obj_music</object>
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_devroom</room>
