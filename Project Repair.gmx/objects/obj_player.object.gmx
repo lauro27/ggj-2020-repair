@@ -110,7 +110,7 @@ if (can_move){
         {
             vsp = -jumpspeed
             image_index = 0
-            sound_play(snd_jump)
+            audio_play_sound(snd_jump,0,false)
         }
     }
     floor_id = instance_place(x,y+vsp+1,obj_solid)
@@ -120,7 +120,7 @@ if (can_move){
         if (vsp&gt;=0)
         {
             y= floor_id.y-floor_id.sprite_height
-            sound_play(snd_bup)
+            if (vsp &gt; 0) {audio_play_sound(snd_bup,0,false)}
         }
         else
         {
@@ -255,7 +255,7 @@ else
             <kind>1</kind>
             <string>//draw_sprite(spr_battery,0,10,10)
 
-draw_set_color
+draw_set_color(c_black)
 draw_text(20,20,"BATTERY:" + string(floor(battery/30)))
 
 /*if(battery &lt;=3600)

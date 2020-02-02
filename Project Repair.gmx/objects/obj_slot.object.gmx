@@ -167,7 +167,7 @@ if (distance_to_object(player)&lt;64)
         draw_rectangle_width(x-64,y-64,x+64,y+64,4)
    }
 }
-if(module == target)
+if(module == target and target != M_NONE)
 {
     draw_set_colour(c_lime);
     draw_rectangle_width(x-64,y-64,x+64,y+64,4)

@@ -28,7 +28,7 @@
             <string>intro_end_offset = 25.6
 loop_end_offset = 59.73
 precision = 0.001
-global.bgm = audio_play_sound(snd_level1, 0, false)
+global.bgm = audio_play_sound(snd_level1, 2, false)
 </string>
           </argument>
         </arguments>
