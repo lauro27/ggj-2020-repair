@@ -10,14 +10,26 @@
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\sprite1</sprite>
     <sprite>sprites\spr_slot</sprite>
-    <sprite>sprites\spr_ladder</sprite>
-    <sprite>sprites\spr_door</sprite>
     <sprite>sprites\spr_block</sprite>
+    <sprite>sprites\spr_door</sprite>
     <sprite>sprites\spr_battery</sprite>
-    <sprite>sprites\spr_elevator</sprite>
-    <sprite>sprites\spr_move</sprite>
-    <sprite>sprites\spr_rthread</sprite>
-    <sprite>sprites\spr_lthread</sprite>
+    <sprite>sprites\spr_bar</sprite>
+    <sprites name="Module">
+      <sprite>sprites\spr_elevator</sprite>
+      <sprite>sprites\spr_rthread</sprite>
+      <sprite>sprites\spr_ladder</sprite>
+      <sprite>sprites\spr_lthread</sprite>
+      <sprite>sprites\spr_move</sprite>
+    </sprites>
+    <sprite>sprites\spr_player_idle_r</sprite>
+    <sprite>sprites\spr_player_idle_l</sprite>
+    <sprite>sprites\spr_player_walk_r</sprite>
+    <sprite>sprites\spr_player_walk_l</sprite>
+    <sprite>sprites\spr_player_jump_r</sprite>
+    <sprite>sprites\spr_player_jump_l</sprite>
+    <sprite>sprites\spr_player_die_r</sprite>
+    <sprite>sprites\spr_player_die_l</sprite>
+    <sprite>sprites\spr_player_create</sprite>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_main</background>
